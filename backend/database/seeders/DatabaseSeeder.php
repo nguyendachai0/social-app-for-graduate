@@ -13,8 +13,8 @@ class DatabaseSeeder extends Seeder
     {
        $this->call([
         // ProfileUserSeeder::class,
-        // EmojiSeeder::class,
-        // UserPostSeeder::class,
+        EmojiSeeder::class,
+        UserPostSeeder::class,
         ShareSeeder::class,
         PostCommentSeeder::class,
         // ConversationSeeder::class,
