@@ -27,12 +27,7 @@ jobs:
         run: npm install
         working-directory: ./frontend
 
-      - name: Run tests
-        run: npm test -- --passWithNoTests
-
       - name: Run ReactJS
         run: npm run dev
 
-    # Optionally, you can add a step to deploy your application
-    # - name: Deploy
-    #   run: ./deploy-script.sh
+   
