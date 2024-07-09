@@ -29,5 +29,6 @@ jobs:
 
       - name: Run ReactJS
         run: npm run dev
+        working-directory: ./frontend
 
    
