@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\RegisterUserRequest;
 use Illuminate\Support\Facades\Validator;
 use  App\Services\ProfileUser\ProfileUserServiceInterface;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+
 
 class AuthController extends Controller
 {
@@ -18,6 +20,14 @@ class AuthController extends Controller
     public function __construct(ProfileUserServiceInterface $profileUserService)
     {
         $this->profileUserService  = $profileUserService;
+    }
+    public function showRegisterView()
+    {
+        return view('auth.register');
+    }
+    public function showLoginView()
+    {
+        return view('auth.login');
     }
     public function register(RegisterUserRequest $request)
     {
@@ -30,26 +40,36 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
         try {
-            if (! $token = JWTAuth::attempt($credentials)) {
+            if (!$token = JWTAuth::attempt($credentials)) {
                 return response()->json(['error' => 'invalid_credentials'], 400);
             }
         } catch (JWTException $e) {
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
-
+        session(['jwt_token' => $token]);
         return response()->json(compact('token'));
     }
 
     public function getAuthenticatedUser()
     {
         try {
-            if (! $user = JWTAuth::parseToken()->authenticate()) {
-                return response()->json(['user_not_found'], 404);
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['error' => 'user_not_found'], 404);
             }
         } catch (JWTException $e) {
-            return response()->json(['token_absent'], $e->getStatusCode());
+            if ($e instanceof HttpException) {
+                $statusCode = $e->getStatusCode();
+                return response()->json(['error' => 'http_exception', 'status_code' => $statusCode], $statusCode);
+            } else {
+                return response()->json(['error' => 'token_exception', 'message' => $e->getMessage()], 500);
+            }
         }
 
+        return response()->json(compact('user'));
+    }
+    public function checkAuthentication()
+    {
+        $user = auth()->user();
         return response()->json(compact('user'));
     }
 }
