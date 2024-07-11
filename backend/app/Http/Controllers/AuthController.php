@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Http\Requests\RegisterUserRequest;
 use  App\Services\ProfileUser\ProfileUserServiceInterface;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
-
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller implements HasMiddleware
 {
@@ -23,18 +24,24 @@ class AuthController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('auth:api', except: ['login'])
+            new Middleware('auth:api', except: ['login', 'register'])
         ];
     }
-    public function login()
+    public function register(RegisterUserRequest $request)
     {
-        $credentials = request(['email', 'password']);
-
+        $validatedData = $request->validated();
+        $user = $this->profileUserService->createProfileUser($validatedData);
+        $token = JWTAuth::fromUser($user);
+        return response()->json(compact('user', 'token'), 201);
+    }
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
         if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        return response()->json($token);
+        return response()->json(compact('token'));
     }
 
     /**
