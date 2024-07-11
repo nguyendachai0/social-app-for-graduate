@@ -9,11 +9,11 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 
 class ProfileUser extends Authenticatable implements JWTSubject
-{  
-    use HasFactory;
+{
+    use HasFactory, Notifiable;
     protected $table = "profile_users";
 
-     /**
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -88,5 +88,4 @@ class ProfileUser extends Authenticatable implements JWTSubject
     {
         return [];
     }
-
 }
