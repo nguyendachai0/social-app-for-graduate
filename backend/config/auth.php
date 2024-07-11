@@ -6,12 +6,8 @@ return [
 
     'defaults' => [
         'guard' => 'api',
-        'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
+        'passwords' => 'users',
     ],
-
-
-
-
     'guards' => [
         'web' => [
             'driver' => 'session',
@@ -19,7 +15,7 @@ return [
         ],
         'api' => [
             'driver' => 'jwt',
-            'provider' => 'users'
+            'provider' => 'users',
         ]
     ],
 
@@ -29,11 +25,9 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\ProfileUser::class,
         ],
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+
     ],
 
     /*
