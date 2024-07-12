@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services\Stories;
 
 use App\Repositories\Stories\StoryRepositoryInterface;
@@ -27,9 +28,8 @@ class StoryService implements StoryServiceInterface
     {
         return $this->storyRepository->update($id,  $data);
     }
-    public function deleteStory($id)
+    public function deleteStory($id,  $userId)
     {
-        return $this->storyRepository->delete($id);
+        return $this->storyRepository->delete($id, $userId);
     }
-
 }

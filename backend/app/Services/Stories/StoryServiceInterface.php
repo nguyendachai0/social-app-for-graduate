@@ -2,11 +2,11 @@
 
 namespace App\Services\Stories;
 
-interface StoryServiceInterface 
+interface StoryServiceInterface
 {
     public function getAllStorys();
     public function getStoryById($id);
     public function createStory(array $data);
     public function updateStory($id, array $data);
-    public function deleteStory($id);
+    public function deleteStory($id, $userId);
 }

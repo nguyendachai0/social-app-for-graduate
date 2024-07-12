@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Story;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterUserRequest extends FormRequest
+class CreateStoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,7 @@ class RegisterUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => 'required|string|max:255',
-            'date_of_birth' => 'required|date_format:Y-m-d',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:profile_users',
-            'password' => 'required|string|min:6|confirmed',
-            'sur_name' => 'nullable|string|max:255',
+            'media_url' => 'required|url'
         ];
     }
 }

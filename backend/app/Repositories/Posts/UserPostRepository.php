@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Repositories\Posts;
+
 use App\Models\UserPost;
 
 class UserPostRepository implements UserPostRepositoryInterface
@@ -27,8 +28,14 @@ class UserPostRepository implements UserPostRepositoryInterface
     {
         return $this->userPost->find($id)->update($data);
     }
-    public function delete($id)
+    public function delete($id, $userId)
     {
-        return $this->userPost->find($id)->delete();
+        $post = $this->userPost->find($id);
+
+        if ($post && $post->profile_user_id == $userId) {
+            return $post->delete();
+        }
+
+        return false;
     }
 }

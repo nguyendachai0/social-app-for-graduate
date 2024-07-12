@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Repositories\Stories;
 
@@ -8,5 +8,5 @@ interface StoryRepositoryInterface
     public function find($id);
     public function create(array $data);
     public function update($id, array $data);
-    public function delete($id);
+    public function delete($id, $userId);
 }

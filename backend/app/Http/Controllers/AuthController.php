@@ -7,6 +7,7 @@ use  App\Services\ProfileUser\ProfileUserServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller implements HasMiddleware
@@ -31,7 +32,7 @@ class AuthController extends Controller implements HasMiddleware
     {
         $validatedData = $request->validated();
         $user = $this->profileUserService->createProfileUser($validatedData);
-        $token = JWTAuth::fromUser($user);
+        $token = Auth::login($user);
         return response()->json(compact('user', 'token'), 201);
     }
     public function login(Request $request)
@@ -72,10 +73,10 @@ class AuthController extends Controller implements HasMiddleware
      * @return \Illuminate\Http\JsonResponse
      */
 
-    public function refresh()
-    {
-        return $this->respondWithToken(auth()->refresh);
-    }
+    // public function refresh()
+    // {
+    //     return auth()->refresh;
+    // }
 
     /**
      * Get the token array structure.

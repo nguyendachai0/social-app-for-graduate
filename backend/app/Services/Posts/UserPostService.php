@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services\Posts;
 
 use App\Repositories\Posts\UserPostRepositoryInterface;
@@ -27,9 +28,8 @@ class UserPostService implements UserPostServiceInterface
     {
         return $this->userPostRepository->update($id,  $data);
     }
-    public function deleteUserPost($id)
+    public function deleteUserPost($id, $userId)
     {
-        return $this->userPostRepository->delete($id);
+        return $this->userPostRepository->delete($id, $userId);
     }
-
 }
