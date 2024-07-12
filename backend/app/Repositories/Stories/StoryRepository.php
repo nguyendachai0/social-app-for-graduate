@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Repositories\Stories;
+
 use App\Models\Story;
 
 class StoryRepository implements StoryRepositoryInterface
@@ -27,8 +28,12 @@ class StoryRepository implements StoryRepositoryInterface
     {
         return $this->story->find($id)->update($data);
     }
-    public function delete($id)
+    public function delete($id, $userId)
     {
-        return $this->story->find($id)->delete();
+        $story = $this->story->find($id);
+        if ($story && $story->profile_user_id ==  $userId) {
+            return  $story->delete();
+        }
+        return false;
     }
 }
