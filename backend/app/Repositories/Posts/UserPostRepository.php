@@ -38,4 +38,11 @@ class UserPostRepository implements UserPostRepositoryInterface
 
         return false;
     }
+    public function myPosts($userId)
+    {
+        $myPosts  = $this->userPost
+            ->where('profile_user_id', $userId)
+            ->get();
+        return $myPosts;
+    }
 }

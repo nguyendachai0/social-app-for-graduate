@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StoryController;
@@ -23,11 +22,11 @@ Route::group([
     'prefix' => 'v1'
 ], function () {
     Route::get('',  [HomeController::class, 'index']);
-    // Route::get('post', [UserPostController::class, 'index']);
+    Route::get('post', [UserPostController::class, 'index']);
     Route::post('post/create', [UserPostController::class, 'create']);
     Route::put('post/update', [UserPostController::class, 'update']);
     Route::delete('post/delete', [UserPostController::class, 'delete']);
-    // Route::get('story', [StoryController::class, 'index']);
+    Route::get('story', [StoryController::class, 'index']);
     Route::post('story/create', [StoryController::class,  'create']);
     Route::put('story/update', [StoryController::class, 'update']);
     Route::delete('story/delete', [StoryController::class, 'delete']);

@@ -32,4 +32,8 @@ class StoryService implements StoryServiceInterface
     {
         return $this->storyRepository->delete($id, $userId);
     }
+    public function getMyStories($userId)
+    {
+        return $this->storyRepository->myStories($userId);
+    }
 }

@@ -32,4 +32,16 @@ class UserPostService implements UserPostServiceInterface
     {
         return $this->userPostRepository->delete($id, $userId);
     }
+    public function getMyPosts($userId)
+    {
+        return $this->userPostRepository->myPosts($userId);
+    }
+    public function isUserPostExist($postId)
+    {
+        $post = $this->getUserPostById($postId);
+        if ($post) {
+            return true;
+        }
+        return false;
+    }
 }
