@@ -9,4 +9,5 @@ interface UserPostServiceInterface
     public function createUserPost(array $data);
     public function updateUserPost($id, array $data);
     public function deleteUserPost($id, $userId);
+    public function getMyPosts($userId);
 }

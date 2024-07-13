@@ -36,4 +36,11 @@ class StoryRepository implements StoryRepositoryInterface
         }
         return false;
     }
+    public function myStories($userId)
+    {
+        $myStories = $this->story
+            ->where('profile_user_id', $userId)
+            ->get();
+        return $myStories;
+    }
 }
