@@ -26,4 +26,8 @@ class HomeController extends Controller
         $data = $this->homeService->getDataForHomePage($userId);
         return response()->json($data);
     }
+    public function websocket()
+    {
+        return view('websocket');
+    }
 }

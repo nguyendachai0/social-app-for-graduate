@@ -14,11 +14,15 @@ class AuthenticateApi
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
+    protected $expept = [
+        'api/auth/login',
+        'api/auth/register'
+    ];
     public function handle(Request $request, Closure $next): Response
     {
-        // if (!$request->bearerToken()) {
-        //     return ApiResponseHelper::error('Unauthenticated');
-        // }
+        if (!$request->bearerToken()) {
+            return ApiResponseHelper::error('Unauthenticated');
+        }
         return $next($request);
     }
 }
