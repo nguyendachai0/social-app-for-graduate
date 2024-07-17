@@ -23,7 +23,7 @@ class ApiResponseHelper
         ], $statusCode);
     }
 
-    public static function pagination($data, $message = 'Operation successful', $pagination, $statusCode = 200)
+    public static function pagination($data, $message = 'Operation successful', $pagination = null, $statusCode = 200)
     {
         return response()->json([
             'success' => true,
