@@ -4,21 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Laravel</title>
-
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
 
 <body>
-    @vite('resources/js/app.js')
-    <script>
-        setTimeout(() => {
-            window.Echo.channel('channelTest').listen('testingEvent', (e) => {
-                console.log(e);
-            })
-        }, 200);
-    </script>
+
 </body>
+<script></script>
 
 </html>

@@ -8,10 +8,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', [AuthControllerWeb::class, 'showLoginView'])->name('login.view');
 Route::post('/login', [AuthControllerWeb::class, 'login'])->name('login');
 Route::post('/register', [AuthControllerWeb::class, 'register'])->name('register');
-Route::middleware('auth:web')->group(function () {
-});
 Route::get('/', [HomeController::class, 'websocket'])->name('home');
-Route::get('test', function () {
-    event(new TestingEvent);
-    return 'done';
+Route::get('broadcast', function () {
+    broadcast(new TestingEvent());
+});
+Route::middleware('auth:web')->group(function () {
 });
