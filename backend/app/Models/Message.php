@@ -22,4 +22,11 @@ class Message extends Model
     {
         return $this->morphMany(Notification::class, 'reference');
     }
+    public function getTimeAttribute(): string
+    {
+        return date(
+            "d M Y, H:i:s",
+            strtotime($this->attributes['created_at'])
+        );
+    }
 }
