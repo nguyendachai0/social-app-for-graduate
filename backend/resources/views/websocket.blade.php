@@ -11,7 +11,8 @@
 </head>
 
 <body>
-
+    @php
+    @endphp
 </body>
 <script></script>
 

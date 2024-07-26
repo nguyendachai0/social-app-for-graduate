@@ -7,3 +7,5 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 });
 Broadcast::channel('testChannel', function () {
 });
+Broadcast::channel('messages', function ($user) {
+});

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StoryController;
 use App\Http\Controllers\UserPostController;
@@ -31,4 +32,5 @@ Route::group([
     Route::post('story/create', [StoryController::class,  'create']);
     Route::put('story/update', [StoryController::class, 'update']);
     Route::delete('story/delete', [StoryController::class, 'delete']);
+    Route::post('/send-message', [ChatController::class, 'sendMessage']);
 });

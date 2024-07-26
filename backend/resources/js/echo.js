@@ -21,3 +21,8 @@ window.Echo = new Echo({
 window.Echo.channel('testChannel').listen('TestingEvent', (e) => {
     console.log(e)
 })
+
+window.Echo.channel('messages')
+    .listen('MessageSent', (e) => {
+        console.log('Message received: ', e.message);
+    });
